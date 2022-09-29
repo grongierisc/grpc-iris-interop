@@ -58,7 +58,6 @@ class UsersService(service.UsersServicer):
 
         service = Director.create_python_business_service("Python.gRPCService")
         iris_response = service.on_process_input(msg)
-        print(iris_response)
 
         response = message.GetUserResponse(user=iris_response.user.to_protobuf())
 
