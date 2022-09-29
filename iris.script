@@ -3,10 +3,12 @@
 
  zn "IRISAPP"
  zpm "install pex-embbeded-python" 
- do $SYSTEM.SQL.DDLImportDir("MSSQL","/irisdev/app/misc/sql")
+
+ Do $SYSTEM.SQL.Schema.ImportDDL("/irisdev/app/misc/sql/init.sql","MSSQL")
  do $System.OBJ.LoadDir("/irisdev/app/src","ck",,1)
 
  set ^EnsPortal.Settings("SuperUser","LastProduction")	= "dc.Demo.Production"
+ do ##class(Ens.Director).SetAutoStart("dc.Demo.Production")
  
  zn "%SYS"
  Do ##class(Security.Users).UnExpireUserPasswords("*")

@@ -29,7 +29,7 @@ class CrudUser(BusinessOperation):
         # iris.sql.exec(sqlInsert,request.user.company,dob,request.user.name,request.user.phone,request.user.title)
         
         # IRIS ORM
-        user = iris.cls('Sample.User')._New()
+        user = iris.cls('Sample.Users')._New()
         if (v:=request.user.company) is not None: user.Company = v 
         if (v:=request.user.name) is not None: user.Name = v 
         if (v:=request.user.phone) is not None: user.Phone = v 
@@ -61,7 +61,7 @@ class CrudUser(BusinessOperation):
         sql_select = """
             SELECT 
                 Company, DOB, Name, Phone, Title, ID
-            FROM Sample."User"
+            FROM Sample."Users"
             where ID = ?
             """
         rs = iris.sql.exec(sql_select,request.id)

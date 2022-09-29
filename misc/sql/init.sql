@@ -1,4 +1,4 @@
-CREATE TABLE Sample.User (
+CREATE TABLE Sample.Users (
 
          Company                                  VARCHAR(50),
          DOB                                      DATE,
