@@ -1,0 +1,34 @@
+
+syntax = "proto3";
+package users;
+
+service Users {
+  rpc CreateUser (users.CreateUserRequest) returns (users.CreateUserResponse);
+  rpc GetUser (users.GetUserRequest) returns (users.GetUserResponse);
+}
+
+message User {
+  uint32 id = 1;
+  string name = 2;
+  string dob = 3;
+  string company = 4;
+  string phone = 5;
+  string title = 6;
+
+}
+
+message CreateUserRequest {
+  User user = 1;
+}
+
+message CreateUserResponse {
+  User user = 1;
+}
+
+message GetUserRequest {
+  uint32 id = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
