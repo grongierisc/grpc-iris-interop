@@ -17,6 +17,8 @@ COPY iris.script /tmp/iris.script
 RUN pip3 install -r requirements.txt
 
 # environment variables for embedded python
+ENV PYTHON_PATH=/usr/irissys/bin/irispython
+ENV SRC_PATH=/irisdev/app
 ENV IRISUSERNAME "SuperUser"
 ENV IRISPASSWORD "SYS"
 ENV IRISNAMESPACE "IRISAPP"
@@ -27,5 +29,4 @@ RUN iris start IRIS \
     && /usr/irissys/bin/irispython src/python/register.py \
     && iris stop IRIS quietly
 
-
-
+ENTRYPOINT [ "/tini", "--", "/irisdev/app/entrypoint.sh" ]
