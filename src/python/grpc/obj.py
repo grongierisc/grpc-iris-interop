@@ -61,4 +61,3 @@ class User:
             phone=user.phone,
             title=user.title
         )
-

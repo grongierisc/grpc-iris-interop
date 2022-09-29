@@ -1,7 +1,7 @@
 # this module is used to create a server for the gRPC service
 #
 # this module has the following classes:
-#     UsersService: this class is used to create a server for the gRPC service it inherits from gen.users_pb2_grpc.UsersServicer
+#     UsersService: this class is used to create a server for the gRPC service it inherits from users_pb2_grpc.UsersServicer
 #
 # this module has the following functions:
 #     main: this function is used to start the server
@@ -11,11 +11,8 @@ from concurrent import futures
 import os
 import sys
 
-# add the gen directory to the path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'gen'))
-
-import gen.users_pb2_grpc as service
-import gen.users_pb2 as message
+import users_pb2_grpc as service
+import users_pb2 as message
 
 import grpc
 
@@ -25,7 +22,7 @@ class UsersService(service.UsersServicer):
     """
     this class is used to create a server for the gRPC service
 
-    it inherits from gen.users_pb2_grpc.UsersServicer
+    it inherits from users_pb2_grpc.UsersServicer
     """
 
     def __init__(self):

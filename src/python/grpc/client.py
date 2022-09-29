@@ -1,6 +1,6 @@
 # this module is used to create a client for the gRPC service
 # this module has the following classes:
-#     UsersClient: this class is used to create a client for the gRPC service it inherits from gen.users_pb2_grpc.UsersStub
+#     UsersClient: this class is used to create a client for the gRPC service it inherits from users_pb2_grpc.UsersStub
 # this module has the following functions:
 #     main: this function is used to start the client
 
@@ -11,11 +11,8 @@ from datetime import date
 import os
 import sys
 
-# add the gen directory to the path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'gen'))
-
-import gen.users_pb2_grpc as service
-import gen.users_pb2 as message
+import users_pb2_grpc as service
+import users_pb2 as message
 
 import grpc
 
@@ -37,7 +34,7 @@ class UsersClient:
         self.channel = channel
         self.stub = service.UsersStub(channel)
 
-    def CreateUser(self, user: User):
+    def create_user(self, user: User):
         """
         this method is used to create a user
         :param user: a User object
@@ -47,7 +44,7 @@ class UsersClient:
         response = self.stub.CreateUser(request)
         return User.from_protobuf(response.user)
 
-    def GetUser(self, id: int):
+    def get_user(self, id: int):
         """
         this method is used to get a user
         :param id: the id of the user
@@ -73,10 +70,10 @@ def main():
             title='CEO'
         )
 
-        user = client.CreateUser(user)
+        user = client.create_user(user)
         print(user)
 
-        user = client.GetUser(user.id)
+        user = client.get_user(user.id)
         print(user)
 
 if __name__ == '__main__':

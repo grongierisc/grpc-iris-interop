@@ -1,5 +1,15 @@
 # 1. interoperability-embedded-python
 
+proto script :
+
+```
+python3 -m grpc_tools.protoc \
+        --proto_path=./misc/proto/users/ \
+        --python_out=src/python/grpc/gen \
+        --grpc_python_out=src/python/grpc/gen \
+        ./misc/proto/users/users.proto
+```
+
 This proof of concept aims to show how the **iris interoperability framework** can be use with **embedded python**.
 
 ## 1.1. Table of Contents
