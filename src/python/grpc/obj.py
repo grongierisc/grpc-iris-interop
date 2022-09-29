@@ -2,7 +2,7 @@
 # this class is used to store user information
 # this class is used to serialize and deserialize user information to protobuf
 
-import gen.users_pb2 as users
+import users_pb2 as users
 
 from dataclasses import dataclass
 from datetime import date

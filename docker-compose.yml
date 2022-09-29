@@ -7,8 +7,10 @@ services:
     restart: always
     command: --check-caps false
     ports: 
-      - 1972
-      - 53795:52773
+      - 53794:1972
+      - 53796:52773
+      - 8080:8080
+      - 50051:50051
       - 53773
     volumes:
       - ./:/irisdev/app

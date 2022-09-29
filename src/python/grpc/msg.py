@@ -20,7 +20,7 @@ class CreateUserResponse(Message):
 @dataclass
 # > The `GetUserResponse` class is a `Message` class that has a `person` attribute of type `User`
 class GetUserResponse(Message):
-    person:User = None
+    user:User = None
 
 @dataclass
 # > A request to get a person by id

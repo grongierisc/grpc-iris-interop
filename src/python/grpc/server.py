@@ -8,8 +8,7 @@
 
 from concurrent import futures
 
-import os
-import sys
+from grongier.pex import Director
 
 import users_pb2_grpc as service
 import users_pb2 as message
@@ -18,19 +17,14 @@ import grpc
 
 from obj import User
 
+from msg import (CreateUserRequest, GetUserRequest)
+
 class UsersService(service.UsersServicer):
     """
     this class is used to create a server for the gRPC service
 
     it inherits from users_pb2_grpc.UsersServicer
     """
-
-    def __init__(self):
-        """
-        this method is used to initialize the UsersService class
-        """
-
-        self.users = []
 
     def CreateUser(self, request, context):
         """
@@ -42,11 +36,12 @@ class UsersService(service.UsersServicer):
         """
             
         user = User.from_protobuf(request.user)
+        msg = CreateUserRequest(user=user)
 
-        self.users.append(user)
-        user.id = len(self.users) - 1
+        service = Director.create_python_business_service("Python.gRPCService")
+        iris_response = service.on_process_input(msg)
 
-        response = message.CreateUserResponse(user=user.to_protobuf())
+        response = message.CreateUserResponse(user=iris_response.user.to_protobuf())
 
         return response
 
@@ -59,9 +54,13 @@ class UsersService(service.UsersServicer):
         :return: a protobuf GetUserResponse object
         """
     
-        user = self.users[request.id]
+        msg = GetUserRequest(id=request.id)
 
-        response = message.GetUserResponse(user=user.to_protobuf())
+        service = Director.create_python_business_service("Python.gRPCService")
+        iris_response = service.on_process_input(msg)
+        print(iris_response)
+
+        response = message.GetUserResponse(user=iris_response.user.to_protobuf())
 
         return response
 

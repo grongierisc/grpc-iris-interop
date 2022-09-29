@@ -42,6 +42,7 @@ class UsersClient:
         """
         request = message.CreateUserRequest(user=user.to_protobuf())
         response = self.stub.CreateUser(request)
+
         return User.from_protobuf(response.user)
 
     def get_user(self, id: int):

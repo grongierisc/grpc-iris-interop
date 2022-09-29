@@ -3,6 +3,7 @@
 
  zn "IRISAPP"
  zpm "install pex-embbeded-python" 
+ do $SYSTEM.SQL.DDLImportDir("MSSQL","/irisdev/app/misc/sql")
  do $System.OBJ.LoadDir("/irisdev/app/src","ck",,1)
 
  set ^EnsPortal.Settings("SuperUser","LastProduction")	= "dc.Demo.Production"

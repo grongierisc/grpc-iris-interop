@@ -38,7 +38,16 @@ class CrudUser(BusinessOperation):
 
         Utils.raise_on_error(user._Save())
         
-        return CreateUserResponse(user._Id())
+        return CreateUserResponse(
+            user=User(
+                id=int(user._Id()),
+                dob=date.fromisoformat(iris.system.SQL.TOCHAR(user.DOB,"YYYY-MM-DD")),
+                company=user.Company,
+                name=user.Name,
+                phone=user.Phone,
+                title=user.Title
+            )
+        )
 
     def get_user(self,request:GetUserRequest):
         """
@@ -51,8 +60,8 @@ class CrudUser(BusinessOperation):
         """
         sql_select = """
             SELECT 
-                Company, DOB, Name, Phone, Title
-            FROM Sample.User
+                Company, DOB, Name, Phone, Title, ID
+            FROM Sample."User"
             where ID = ?
             """
         rs = iris.sql.exec(sql_select,request.id)
@@ -62,5 +71,5 @@ class CrudUser(BusinessOperation):
                 dob = date.fromisoformat(iris.system.SQL.TOCHAR(user[1],"YYYY-MM-DD"))
             except:
                 dob = ''
-            response.user= User(company=user[0],dob=dob,name=user[2],phone=user[3],title=user[4])
+            response.user= User(id=user[5],company=user[0],dob=dob,name=user[2],phone=user[3],title=user[4])
         return response

@@ -13,6 +13,8 @@ class gRPCService(BusinessService):
         return 
 
     def on_process_input(self,request):
-        return self.send_request_sync(self.target,request)
+        rsp = self.send_request_sync(self.target,request)
+        self.log_info(str(type(rsp.user.dob)))
+        return rsp
 
  
