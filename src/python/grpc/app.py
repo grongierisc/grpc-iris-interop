@@ -2,6 +2,14 @@
 #
 # this module has the following classes:
 #     app: this class is used to create the flask app
+#      it has the following methods:
+#          create_user: this method is used to create a user
+#                       it returns a json object
+#                       it converts the request payload to a User object
+#                       it calls the gRPC client to create the user
+#          get_user: this method is used to get a user
+#                    it returns a json object
+#                    it calls the gRPC client to get the user by id
 #
 # this module has the following functions:
 #     main: this function is used to start the flask app

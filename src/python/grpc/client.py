@@ -23,6 +23,13 @@ class UsersClient:
     this class is an helper class for the gRPC client
     it overrides the methods of the UsersStub class
     to make use of the User class
+    this class has the following methods:
+        create_user: this method is used to create a user
+                     this method converts the request to a User protobuf object
+                     this method calls the original method
+        get_user: this method is used to get a user
+                  this method calls the original method
+        __init__: create a new stub from the channel
     """
     channel = None
     stub = None
